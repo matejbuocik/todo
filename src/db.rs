@@ -1,8 +1,6 @@
 use rusqlite::{Connection, Result};
 use std::time::SystemTime;
 
-const DB_PATH: &str = "./database"; // TODO config file
-
 #[derive(Debug)]
 pub struct Note {
     id: i64,
@@ -22,8 +20,8 @@ impl Note {
     }
 }
 
-pub fn connect() -> Result<Connection> {
-    let db = Connection::open(DB_PATH)?;
+pub fn connect(path: &str) -> Result<Connection> {
+    let db = Connection::open(path)?;
 
     db.execute(
         "CREATE TABLE IF NOT EXISTS notes (
